@@ -11,14 +11,15 @@
             </div>
             
             <h5>$<%= product.price %></h5>
-            <%= link_to "add to Cart" ,products_path(product), class: "btn btn-success"%>
+          
           </div>
             
         </div>
       </div>  
     <% end %> 
-      
+    
   </div>
+  <div ></div>
   <div class="text-center">
      <%= paginate @products %>
   </div>
