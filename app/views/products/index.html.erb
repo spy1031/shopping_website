@@ -1,9 +1,19 @@
 <div class="container">
-  <% @products.each do |product|%>
-    <%=image_tag product.image %>
-    <h3><%= product.name %></h3>
-    <p><%= product.description %></p>
-    <h5>$<%= product.price %></h5>
-    <%= link_to "add to Cart" %>
-  <% end %>
+  <div class="row">
+    <% @products.each do |product|%>
+      <div class="col-md-1" style="width:20%">
+        <div class="product-item">
+          <%=image_tag product.image %>
+          <div class="item-text">
+            <h4><%= product.name %></h4>
+            <%= truncate(product.description, length: 55 )%>
+            <h5>$<%= product.price %></h5>
+            <%= link_to "add to Cart" ,products_path(product), class: "btn btn-success"%>
+          </div>
+            
+        </div>
+      </div>  
+    <% end %>
+  </div>
+  
 </div>
