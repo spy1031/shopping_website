@@ -1,19 +1,31 @@
 <div class="container">
   <div class="row">
-    <% @products.each do |product|%>
-      <div class="col-md-1" style="width:20%">
-        <div class="product-item">
-          <%=image_tag product.image %>
-          <div class="item-text">
-            <h4><%= product.name %></h4>
-            <%= truncate(product.description, length: 55 )%>
-            <h5>$<%= product.price %></h5>
-            <%= link_to "add to Cart" ,products_path(product), class: "btn btn-success"%>
+    <div class="col-md-9">
+      <% @products.each do |product|%>
+        <div class="col-md-1" style="width:20%">
+          <div class="product-item clearfix">
+            <%=image_tag product.image %>
+            <div class="item-text">
+              <h4><%= product.name %></h4>
+              <div class="product-description">
+                <%= truncate(product.description, length: 40 )%>
+              </div>
+              
+              <h5>$<%= product.price %></h5>
+              <%= link_to "add to Cart" ,products_path(product), class: "btn btn-success"%>
+            </div>
+              
           </div>
-            
-        </div>
-      </div>  
-    <% end %>
+        </div>  
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <h3>Cart</h3>
+      <hr>
+
+
+    </div>
+      
   </div>
   <div class="text-center">
      <%= paginate @products %>

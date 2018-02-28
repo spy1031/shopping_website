@@ -4,6 +4,7 @@
   padding: 4px;
   text-align: center;
   postion: relative;
+  height: 342px;
 }
 
 .product-item img{
@@ -14,3 +15,14 @@
   height: 38px;
 }
 
+.product-description {
+  text-align: left;
+  height: 60px;
+}
+
+
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
