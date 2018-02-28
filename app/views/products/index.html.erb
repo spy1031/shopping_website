@@ -1,0 +1,9 @@
+<div class="container">
+  <% @products.each do |product|%>
+    <%=image_tag product.image %>
+    <h3><%= product.name %></h3>
+    <p><%= product.description %></p>
+    <h5>$<%= product.price %></h5>
+    <%= link_to "add to Cart" %>
+  <% end %>
+</div>
