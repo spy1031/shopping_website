@@ -7,4 +7,5 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "Not allow!"
       redirect_to root_path
     end
+  end
 end
