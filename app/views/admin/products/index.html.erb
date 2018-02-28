@@ -1,25 +1,49 @@
 <div class="container">
   <div class="row">
-    <% @products.each do |product|%>
-      <div class="col-md-1" style="width:20%">
-        <div class="product-item clearfix">
-          <%=image_tag product.image %>
-          <div class="item-text">
-            <h4><%= product.name %></h4>
-            <div class="product-description">
-              <%= truncate(product.description, length: 40 )%>
+    <div class="col-md-9">
+      <% @products.each do |product|%>
+        <div class="col-md-1" style="width:20%">
+          <div class="product-item clearfix">
+            <%=image_tag product.image %>
+            <div class="item-text">
+              <h4><%= product.name %></h4>
+              <div class="product-description">
+                <%= truncate(product.description, length: 40 )%>
+              </div>
+              
+              <h5>$<%= product.price %></h5>
+              <%= link_to "Delete" ,admin_products_path(product),method: :delete,class: "btn btn-danger" ,data:{confirm:"Are you sure>"}%>
             </div>
-            
-            <h5>$<%= product.price %></h5>
-          
+              
           </div>
-            
+        </div>  
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <h3 class="text-center">New</h3>
+      <hr>
+      <%= form_for [:admin,@product] do |f| %>
+        <div class="form-group">
+          <%= f.label :name,"Name" %>
+          <%= f.text_field :name ,{class: "form-control"}%>
         </div>
-      </div>  
-    <% end %> 
-    
+        
+        <div class="form-group">
+          <%= f.label :description,"description" %>
+          <%= f.text_area :description ,{class: "form-control"}%>
+        </div>
+        <div class="form-group">
+          <%= f.label :price,"Price" %>
+          <%= f.text_field :price,{class: "form-control"} %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.submit class: "btn btn-success" %>
+        </div>    
+      <% end %>
+    </div>
+      
   </div>
-  <div ></div>
   <div class="text-center">
      <%= paginate @products %>
   </div>
