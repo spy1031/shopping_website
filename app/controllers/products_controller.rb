@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     current_cart.add_cart_item(@product)
 
-    redirect_to root_path
+    render :json => {:id => @product.id, :name => @product.name, :image =>@product.image.url}
   end
 
 end
