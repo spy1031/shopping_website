@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     resource :products ,only:[:index, :create, :destroy]
 
   end
-  resource :products ,only:[:index, :show]
+  resource :products ,only:[:index, :show] do
+    member do
+      post :add_to_cart
+    end
+  end
 
   resource :cart
 end
