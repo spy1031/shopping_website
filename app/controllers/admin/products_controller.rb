@@ -5,11 +5,19 @@ class Admin::ProductsController < ApplicationController
     @product = Product.new
   end
 
+
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    flash[:alert] = "product was successfully deleted"
+    redirect_back(fallback_location: admin_root_path)
+  end
+
   def create
     @product = Product.new(product_params)
     if @product.save
        flash[:notice] = "product was successfully created"
-      redirect_to admin_products_path
+      redirect_to admin_roots_path
     else
       flash.now[:alert] = "restaurant was failed to created"
       render :index
