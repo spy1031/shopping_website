@@ -12,7 +12,7 @@
               </div>
               
               <h5>$<%= product.price %></h5>
-              <%= link_to "Delete" ,admin_products_path(id: product.id),method: :delete ,data:{confirm:"Are you sure>"} ,class: "btn btn-danger"%>
+              <%= link_to "Delete" ,admin_product_path(id: product.id),method: :delete ,data:{confirm:"Are you sure>"} ,class: "btn btn-danger"%>
             </div>
               
           </div>

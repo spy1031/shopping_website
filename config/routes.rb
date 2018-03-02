@@ -4,14 +4,15 @@ Rails.application.routes.draw do
   root "products#index"
   namespace :admin do
     root "products#index"
-    resource :products ,only:[:index, :create, :destroy]
+    resources :products ,only:[:index, :create, :destroy]
 
   end
-  resource :products ,only:[:index, :show] do
+  resources :products ,only:[:index, :show] do
     member do
       post :add_to_cart
     end
   end
 
-  resource :cart
+  resources :carts
+  resources :cart_items, only:[:destroy]
 end
