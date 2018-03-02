@@ -14,5 +14,10 @@ Rails.application.routes.draw do
   end
 
   resources :carts
-  resources :cart_items, only:[:destroy]
+  resources :cart_items, only:[:destroy] do
+    member do
+      post :plus_quantity
+      post :minus_quantity
+    end
+  end
 end

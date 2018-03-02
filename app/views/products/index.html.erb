@@ -47,8 +47,8 @@
               </div>
             </div>              
           <% end %>
-          <hr>
-        </div>          
+        </div>     
+        <hr>     
       <% end %>
     </div>
       
@@ -103,8 +103,37 @@
       url: "/cart_items/" + id,
       method: "DELETE",
       dataType: "json",
+
       success: function(data){
         $("#cart-list").find("#"+data["id"]).remove();
+      }
+    })
+  });
+
+  $("#cart-list").on("click",".plus-item",function(event){
+    var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
+
+    $.ajax({
+      url: "/cart_items/" + id +"/plus_quantity",
+      method: "POST",
+      dataType: "json",
+      success: function(data){
+        var cart_item = $("#cart-list").find("#"+data["id"]);
+        $(cart_item).find(".quantity").html(data["quantity"]);
+      }
+    })
+  });
+
+  $("#cart-list").on("click",".minus-item",function(event){
+    var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
+
+    $.ajax({
+      url: "/cart_items/" + id +"/minus_quantity",
+      method: "POST",
+      dataType: "json",
+      success: function(data){
+        var cart_item = $("#cart-list").find("#"+data["id"]);
+        $(cart_item).find(".quantity").html(data["quantity"]);
       }
     })
   });
