@@ -3,7 +3,7 @@ class CartItemsController < ApplicationController
     @cart_item = current_cart.cart_items.find_by(product_id: params[:id])
     @cart_item.quantity+=1
     @cart_item.save!
-    render :json => {:id =>params[:id] , :quantity => @cart_item.quantity}
+    render :json => {:id =>params[:id] , :quantity => @cart_item.quantity, :price => @cart_item.product.price}
   end
 
 
@@ -13,16 +13,17 @@ class CartItemsController < ApplicationController
     if @cart_item.quantity>0
       @cart_item.quantity -=1
       @cart_item.save!
-      render :json => {:id =>params[:id] , :quantity => @cart_item.quantity}
+      render :json => {:id =>params[:id] , :quantity => @cart_item.quantity, :price => @cart_item.product.price}
     else
-      render :json => {:id =>params[:id] , :quantity => 0}
+      render :json => {:id =>params[:id] , :quantity => 0 }
     end
   end
 
 
   def destroy
     @cart_item = current_cart.cart_items.find_by(product_id: params[:id])
+    @minus_price = @cart_item.quantity * @cart_item.product.price
     @cart_item.destroy
-    render :json => {:id =>params[:id]}
+    render :json => {:id =>params[:id], :minus_price => @minus_price}
   end
 end

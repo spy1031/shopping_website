@@ -33,7 +33,8 @@
                   <img src="<%= item.product.image%>">
                 </div>
                 <div class="col-md-6 cart-item-right">
-                  <p id="price">$ <%= item.product.price %></p>              
+                  <p id="price">$ <%= item.product.price %></p>
+                  <% @subtotal+=item.product.price * item.quantity %>              
                   <div class=" cart-item-button">
                     <span class="minus-item text-muted glyphicon glyphicon-minus"></span>
                     <span class="text-muted quantity"> <%= item.quantity %> </span>
@@ -48,7 +49,16 @@
             </div>              
           <% end %>
         </div>     
-        <hr>     
+        <hr>
+        <div class="subtotal row">
+          <div class="col-md-6">
+            <h5>SUBTOTAL   </h5>
+          </div>
+          <div class="col-md-6">
+            
+            <h5 id="total-price">$ <%= @subtotal%></h5>
+          </div>                    
+        </div>     
       <% end %>
     </div>
       
@@ -68,6 +78,9 @@
       method: "POST",
       dataType: "json",      
       success: function(data){
+        var total_price = $(".subtotal.row").find("#total-price");
+        var total_price_value = Number(total_price.html().replace('$ ',''));
+        $(total_price).html("$ "+(total_price_value+Number(data["price"])));
 
         var cart_item = $("#cart-list").find("#"+data["id"]);
         if(cart_item.length){
@@ -87,10 +100,11 @@
           p_img.append('<img>');
           p_img.find("img").attr("src",photo);
           $(cart_item).find("h5").html(data["name"]);
-          
+          $(cart_item).find("#price").html("$ "+data["price"]);
           $(cart_item).find(".quantity").html(data["quantity"]);
           $("#cart-list").append(cart_item);
         }
+
       }
     })    
   }); 
@@ -105,6 +119,10 @@
       dataType: "json",
 
       success: function(data){
+        var total_price = $(".subtotal.row").find("#total-price");
+        var total_price_value = Number(total_price.html().replace('$ ',''));
+        $(total_price).html("$ "+(total_price_value-Number(data["minus_price"])));
+
         $("#cart-list").find("#"+data["id"]).remove();
       }
     })
@@ -118,6 +136,10 @@
       method: "POST",
       dataType: "json",
       success: function(data){
+        var total_price = $(".subtotal.row").find("#total-price");
+        var total_price_value = Number(total_price.html().replace('$ ',''));
+        $(total_price).html("$ "+(total_price_value+Number(data["price"])));
+
         var cart_item = $("#cart-list").find("#"+data["id"]);
         $(cart_item).find(".quantity").html(data["quantity"]);
       }
@@ -132,6 +154,10 @@
       method: "POST",
       dataType: "json",
       success: function(data){
+        var total_price = $(".subtotal.row").find("#total-price");
+        var total_price_value = Number(total_price.html().replace('$ ',''));
+        $(total_price).html("$ "+(total_price_value-Number(data["price"])));
+
         var cart_item = $("#cart-list").find("#"+data["id"]);
         $(cart_item).find(".quantity").html(data["quantity"]);
       }
