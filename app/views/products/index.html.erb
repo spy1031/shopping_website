@@ -23,16 +23,22 @@
     <div class="col-md-3"">
       <h3>Cart</h3>
       <hr>
-      <% if @cart_products != nil %>
+      <% if @cart_items != nil %>
         <div id="cart-list">
-          <% @cart_products.each do |product|%>
-            <div id="<%= product.id%>">
+          <% @cart_items.each do |item|%>
+            <div id="<%= item.product.id%>">
               <div class="product-item clearfix" >
                 <div class="product-image col-md-6">
-                  <img src="<%= product.image%>">
+                  <img src="<%= item.product.image%>">
                 </div>
                 <div class="col-md-6">
-                  <h5><%= product.name %></h5>                         
+                  <h5><%= item.product.name %></h5>                  
+                  <div class="col-md-6" id="product_q">
+                    <h6><%= item.quantity %></h6>
+                  </div>
+                  <div class="col-md-6" >
+                    
+                  </div>                           
                 </div>                
               </div>
             </div>              
@@ -57,28 +63,33 @@
       method: "POST",
       dataType: "json",      
       success: function(data){
-        var cart_item = document.createElement("div");
-        var photo = data["image"]
-        var urlBase = getRootUrl().slice(0, -1);
-        var d = new Date();
-        cart_item.id= data["id"];
-        $(cart_item).html($("#cart-product-template").html());
-        console.log(data["image"]);
+
+        var cart_item = $("#cart-list").find("#"+data["id"]);
+        if(cart_item.length){
+          console.log(data["quantity"]);
+          $(cart_item).find("h6").html(data["quantity"]);
+        }
+        else
+        {
+          cart_item = document.createElement("div");
         
-        var p_img = $(cart_item).find(".product-image");
-        p_img.append('<img>');
-        p_img.find("img").attr("src",photo);
-        $(cart_item).find("h5").html(data["name"]);
-        $("#cart-list").append(cart_item);
+
+          var photo = data["image"];
+          cart_item.id= data["id"];
+          $(cart_item).html($("#cart-product-template").html());        
+          
+          var p_img = $(cart_item).find(".product-image");
+          p_img.append('<img>');
+          p_img.find("img").attr("src",photo);
+          $(cart_item).find("h5").html(data["name"]);
+          
+          $(cart_item).find("h6").html(data["quantity"]);
+          $("#cart-list").append(cart_item);
+        }
       }
-    })
+    })    
+  }); 
 
-    
-  });
-
-  function getRootUrl() {
-  return window.location.origin?window.location.origin+'/':window.location.protocol+'/'+window.location.host+'/';
-}
 </script>
 
 <script type="text/template" id="cart-product-template">
@@ -87,7 +98,12 @@
     
     </div>
     <div class="col-md-6">
-      <h5></h5>                         
+      <h5></h5>      
+      <div class="col-md-6" id="product_q">
+        <h6></h6>
+      </div>  
+      <div class="col-md-6" >                    
+      </div>                               
     </div>                
   </div>
 </script>

@@ -10,7 +10,7 @@ class Cart < ApplicationRecord
       cart_item = self.cart_items.build(product_id: product.id)
       cart_item.save!
     end
-    self.cart_items
+    cart_item || existing_item
   end
 end
 
