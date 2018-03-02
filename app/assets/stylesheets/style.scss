@@ -55,5 +55,19 @@
   display: inline-block;
   float: left;
 }
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+table {
+  width: 100%;
+}
 
+td {
+  width: 20%;
+  
+}
 
+.shop-table img{
+  height: 20%;
+
+}

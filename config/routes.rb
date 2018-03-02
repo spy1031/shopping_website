@@ -13,8 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :carts
-  resources :cart_items, only:[:destroy] do
+  
+  resources :cart_items, only:[:index,:destroy] do
     member do
       post :plus_quantity
       post :minus_quantity

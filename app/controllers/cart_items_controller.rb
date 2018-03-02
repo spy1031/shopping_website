@@ -1,4 +1,10 @@
 class CartItemsController < ApplicationController
+  
+  def index
+      @cart_items = current_cart.cart_items.all
+      @subtotal =0
+  end
+
   def plus_quantity
     @cart_item = current_cart.cart_items.find_by(product_id: params[:id])
     @cart_item.quantity+=1
