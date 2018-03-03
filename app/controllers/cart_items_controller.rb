@@ -3,6 +3,7 @@ class CartItemsController < ApplicationController
   def index
       @cart_items = current_cart.cart_items.all
       @subtotal =0
+      @order = Order.new
   end
 
   def plus_quantity

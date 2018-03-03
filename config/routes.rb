@@ -20,4 +20,6 @@ Rails.application.routes.draw do
       post :minus_quantity
     end
   end
+
+  resources :orders, only:[:create,:update]
 end

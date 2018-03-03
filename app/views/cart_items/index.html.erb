@@ -46,23 +46,29 @@
 
   <div class="panel panel-default">
     <!-- Default panel contents -->
+    
     <div class="panel-heading">Shipping information</div>
-    <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1">Name</span>
-      <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1">
-    </div>
-    <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1">Email</span>
-      <input type="text" class="form-control" placeholder="Eamil" aria-describedby="basic-addon1">
-    </div>
-    <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1">Phone</span>
-      <input type="text" class="form-control" placeholder="Phoen" aria-describedby="basic-addon1">
-    </div>
-    <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1">Address</span>
-      <input type="text" class="form-control" placeholder="Address" aria-describedby="basic-addon1">
-    </div>
+    
+    <%= form_for @order do |f|%>
+      <div class="form-group">
+        
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name , class: "form-control"%>
+
+
+        <%= f.label :phone, "Phone" %>
+        <%= f.text_field :phone , class: "form-control"%>
+
+        <%= f.label :address, "Address" %>
+        <%= f.text_field :address , class: "form-control"%>
+
+       
+      </div>
+      
+
+
+    <% end %>
+    
   </div>
 
   <div class="panel panel-default">
