@@ -2,7 +2,12 @@ class Admin::ProductsController < ApplicationController
 
   def index 
     @products = Product.page(params[:page]).per(10)
-    @product = Product.new
+    if session[:form_data].present?
+      @product = Product.new(session[:form_data])
+    else
+      @product = Product.new
+    end
+    
   end
 
 
