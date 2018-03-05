@@ -35,12 +35,14 @@
           
         </tr>
       <% end%>
+
+        
       
       <td></td>
       <td></td>
       <td>Subtotal</td>
       <td></td>
-      <td>$<%= @subtotal%></td>
+      <td id="total-price">$<%= @subtotal%></td>
     </table>
   </div>
 
@@ -95,8 +97,8 @@
 </div>
 
 <script type="text/javascript">
-  $("#cart-list").on("click",".delete-item",function(event){
-    var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
+  $(".shop-table").on("click",".delete-item",function(event){
+    var id = event.target.parentNode.parentNode.parentNode.id;
 
     $.ajax({
       url: "/cart_items/" + id,
@@ -104,46 +106,46 @@
       dataType: "json",
 
       success: function(data){
-        var total_price = $(".subtotal.row").find("#total-price");
-        var total_price_value = Number(total_price.html().replace('$ ',''));
+        var total_price = $(".shop-table").find("#total-price");
+        var total_price_value = Number(total_price.html().replace('$',''));
         $(total_price).html("$ "+(total_price_value-Number(data["minus_price"])));
 
-        $("#cart-list").find("#"+data["id"]).remove();
+        $(".shop-table").find("#"+data["id"]).remove();
       }
     })
   });
 
-  $("#cart-list").on("click",".plus-item",function(event){
-    var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
+  $(".shop-table").on("click",".plus-item",function(event){
+    var id = event.target.parentNode.parentNode.id;
 
     $.ajax({
       url: "/cart_items/" + id +"/plus_quantity",
       method: "POST",
       dataType: "json",
       success: function(data){
-        var total_price = $(".subtotal.row").find("#total-price");
-        var total_price_value = Number(total_price.html().replace('$ ',''));
+        var total_price = $(".shop-table").find("#total-price");
+        var total_price_value = Number(total_price.html().replace('$',''));
         $(total_price).html("$ "+(total_price_value+Number(data["price"])));
 
-        var cart_item = $("#cart-list").find("#"+data["id"]);
+        var cart_item = $(".shop-table").find("#"+data["id"]);
         $(cart_item).find(".quantity").html(data["quantity"]);
       }
     })
   });
 
-  $("#cart-list").on("click",".minus-item",function(event){
-    var id = event.target.parentNode.parentNode.parentNode.parentNode.id;
+  $(".shop-table").on("click",".minus-item",function(event){
+    var id = event.target.parentNode.parentNode.id;
 
     $.ajax({
       url: "/cart_items/" + id +"/minus_quantity",
       method: "POST",
       dataType: "json",
       success: function(data){
-        var total_price = $(".subtotal.row").find("#total-price");
-        var total_price_value = Number(total_price.html().replace('$ ',''));
+        var total_price = $(".shop-table").find("#total-price");
+        var total_price_value = Number(total_price.html().replace('$',''));
         $(total_price).html("$ "+(total_price_value-Number(data["price"])));
 
-        var cart_item = $("#cart-list").find("#"+data["id"]);
+        var cart_item = $(".shop-table").find("#"+data["id"]);
         $(cart_item).find(".quantity").html(data["quantity"]);
       }
     })

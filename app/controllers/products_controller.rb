@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
     @products = Product.page(params[:page]).per(10)
     @cart_items = current_cart.cart_items.all    
     @subtotal = 0
-    
+    session[:form_data] = nil
   end
 
   def show

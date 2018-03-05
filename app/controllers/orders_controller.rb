@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   def create
     if current_user.nil?
-      session[:form_data] = params
+      session[:form_data] = params[:order]
       redirect_to new_user_session_path
     else
       @order = Order.new(order_params)
