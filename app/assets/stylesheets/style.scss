@@ -51,6 +51,25 @@
   background-color: #e7e7e7; color: black;
 }
 
+.item-button{
+  background-color: #e7e7e7; color: black;
+  padding: 1px;
+  border: 0;
+  margin: 2px;
+  height: 100%;
+  display: block;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+
+.text-right button{
+  margin: 2px;
+  float: right;
+  display: inline-block;
+  padding: 1px;
+}
+
 .subtotal h5{
   display: inline-block;
   float: left;
