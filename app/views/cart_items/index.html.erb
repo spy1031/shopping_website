@@ -36,13 +36,15 @@
         </tr>
       <% end%>
 
-        
+      <tr class="subtotal-row">
+        <td></td>
+        <td></td>
+        <td>Subtotal</td>
+        <td></td>
+        <td id="total-price">$<%= @subtotal%></td>
+      </tr>  
       
-      <td></td>
-      <td></td>
-      <td>Subtotal</td>
-      <td></td>
-      <td id="total-price">$<%= @subtotal%></td>
+        
     </table>
   </div>
 
@@ -65,12 +67,7 @@
         <%= f.text_field :address , class: "form-control"%>
 
         <% f.number_field :aomount ,value: @subtotal  %>
-
-      </div>      
-     
-      
-   
-    
+      </div>           
   </div>
   
   <div >

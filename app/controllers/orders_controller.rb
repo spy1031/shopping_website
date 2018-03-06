@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
   
+  def index
+    @orders = Order.all
+  end
 
   def create
     if current_user.nil?
@@ -9,14 +12,27 @@ class OrdersController < ApplicationController
       @order = Order.new(order_params)
       @cart_items = current_cart.cart_items.all
       @order.user_id = current_user.id
-      if @order.save!
+      @order.sn = 1000000 + current_user.id
+      @order.payment_status = "Not Paid"
+      @order.shipping_status = "Not shipped"
+      @order.email = current_user.email
+      @order.amount = 0
+      if @order.save
         @cart_items.each do |item|
           order_item = @order.order_items.build(product_id: item.product.id, price: item.product.price, quantity: item.quantity)
+          @order.amount += item.product.price * item.quantity
           order_item.save!
         end
-
+        @order.save!
+        current_cart = nil
+        redirect_to order_path(@order)
+      else
+        @subtotal =0;
+        flash[:alert] = @order.errors.full_messages.to_sentence
+        render 'cart_items/index.html.erb'
       end
-      redirect_back(fallback_location: root_path)
+    
+      
     end
       
 
@@ -24,7 +40,25 @@ class OrdersController < ApplicationController
   end
 
 
+  def show
+    @order = Order.find(params[:id])
+    
+  end
+
+  def destroy
+    @order= Order.find(params[:id])
+    if @order.shipping_status == "Not shipped"
+      @order.destroy
+      redirect_to orders_path
+      flash[:notice] = "Order was successfully canceled"
+    else
+      render :index
+      flash[:alert] = "Not allow! Order was shipping"
+    end
+    
+  end
+
   def order_params
-    params.require(:order).permit(:name, :email, :phone, :address, :payment_method)
+    params.require(:order).permit(:name, :phone, :address)
   end
 end

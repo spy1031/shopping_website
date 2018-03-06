@@ -74,14 +74,26 @@
   display: inline-block;
   float: left;
 }
+
+
+
 .table > tbody > tr > td {
-     vertical-align: middle;
+   vertical-align: middle;
+   
 }
+
+.panel-info{
+  padding:0;
+  border-right: 1px solid transparent;
+  border-color: #ddd;
+  
+}
+
 table {
   width: 100%;
 }
 
-td {
+.shop-table td {
   width: 20%;
 
 }
@@ -90,6 +102,22 @@ td {
   height: 20%;
 
 }
+
+.order-item {
+  border: 1px solid transparent;
+  border-color: #ddd;
+  padding: 0px 0px 10px;
+  border-collapse: collapse;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.panel-heading.order{
+  border-right:none;
+}
+
 
 .form-control {
   width:20%;
