@@ -56,10 +56,7 @@
         
         <%= f.label :name, "Name" %>
         <%= f.text_field :name , class: "form-control"%>
-
-        
-        <%= f.label :email, "Email" %>
-        <%= f.text_field :email , class: "form-control"%>
+       
 
         <%= f.label :phone, "Phone" %>
         <%= f.text_field :phone , class: "form-control"%>
@@ -68,28 +65,16 @@
         <%= f.text_field :address , class: "form-control"%>
 
         <% f.number_field :aomount ,value: @subtotal  %>
-      </div>
-      
-    
-    
-  </div>
 
-  <div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading">Payment method</div>
+      </div>      
+     
+      
+   
     
-      
-      <%= f.radio_button :payment_method ,"ATM"%>
-      <%= f.label :payment_method, "ATM" %>
-      <br>
-      
-      <%= f.radio_button :payment_method , "Credit Card"%>
-      <%= f.label :payment_method, "Credit Card" %>
-      <br>
-      
   </div>
-  <div class="text-right" data-turbolinks="false">
-    <%= f.submit class: "btn btn-primary" %>
+  
+  <div >
+    <%= f.submit "Checkout",class: "btn btn-primary" %>
   </div>
     
   <% end %>
