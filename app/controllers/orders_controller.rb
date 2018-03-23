@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
       @order = Order.new(order_params)
       @cart_items = current_cart.cart_items.all
       @order.user_id = current_user.id
-      @order.sn = 1000000 + current_user.id
+      @order.sn = 1000000 + Order.count
       @order.payment_status = "Not Paid"
       @order.shipping_status = "Not shipped"
       @order.email = current_user.email
@@ -24,7 +24,9 @@ class OrdersController < ApplicationController
           order_item.save!
         end
         @order.save!
+        session[:card_id] = nil #訂單成立清空購物車
         current_cart = nil
+        UserMailer.notify_order_create(@order).deliver_now! #寄送訂單成立email
         redirect_to order_path(@order)
       else
         @subtotal =0;

@@ -5,7 +5,7 @@ class CartItemsController < ApplicationController
       @subtotal =0
 
       if session[:form_data].present?
-        @product = Order.new(session[:form_data])
+        @order = Order.new(session[:form_data])
       else
         @order = Order.new
       end
