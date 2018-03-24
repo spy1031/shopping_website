@@ -24,9 +24,9 @@ class OrdersController < ApplicationController
           order_item.save!
         end
         @order.save!
-        session[:card_id] = nil #訂單成立清空購物車
-        current_cart = nil
+        
         UserMailer.notify_order_create(@order).deliver_now! #寄送訂單成立email
+        session[:cart_id] = nil #訂單成立清空購物車
         redirect_to order_path(@order)
       else
         @subtotal =0;
