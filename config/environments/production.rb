@@ -62,7 +62,15 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "shopping_website_#{Rails.env}"
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: "https://my-shopping-website.herokuapp.com/" }
-  config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => 'smtp.gmail.com',
+    :port => 587,
+    :authentication => :plain,
+    :domain => 'gmail.com',
+    :user_name => 'sp831031@gmail.com',
+    :password => 'dkmqpioutrjpscla'
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
