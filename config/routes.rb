@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root "products#index"
   namespace :admin do
     root "products#index"
-    resources :products ,only:[:index, :create, :destroy]
+    resources :products 
 
   end
   resources :products ,only:[:index, :show] do
