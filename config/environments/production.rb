@@ -68,8 +68,8 @@ Rails.application.configure do
     :port => 587,
     :authentication => :plain,
     :domain => 'gmail.com',
-    :user_name => 'sp831031@gmail.com',
-    :password => 'dkmqpioutrjpscla'
+    :user_name => 'gmail',
+    :password => 'password'
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
