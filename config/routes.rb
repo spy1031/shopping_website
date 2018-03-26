@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root "products#index"
     resources :products 
-
+    resources :orders
   end
   resources :products ,only:[:index, :show] do
     member do
