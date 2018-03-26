@@ -41,11 +41,12 @@
       <%= form_for [:admin,@order] do |f| %>
     <div class="form-group">
       <%= f.label :payment_status,"Payemnt Status" %>
-      <%= select_tag(:payment_status, options_for_select([['No paid', 1], ['Paided', 2]], 1)) %>
+      <%= select_tag(:payment_status, options_for_select([['No paid', 'No paid'], ['Paided', 'Paided']], selected: @order.payment_status)) %>
     
       <br>
       <%= f.label :shipping_status,"Shipping Status" %>
-      <%= select_tag(:shipping_status, options_for_select([['Not shipped', 1], ['Shipped', 2]], 1)) %>
+      <%= select_tag(:shipping_status, options_for_select([['Not shipped', 'Not shipped'], ['Shipped', 'Shipped']], selected: @order.shipping_status)) %>
+  
       <br>
      
       <%= f.submit class: "btn btn-success" %>
